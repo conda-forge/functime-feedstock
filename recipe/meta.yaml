@@ -10,7 +10,6 @@ source:
   sha256: 825ab23683394790fbca7c27267d01b0ea8f645ccfcfda6b78ba71d48ae21a93
 
 build:
-  skip: True  # [py<38]
   script:
     - export PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1  # [unix]
     - set PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1  # [win]
@@ -32,11 +31,12 @@ requirements:
     - flaml <3,>=2.0.2
     - holidays
     - numpy
-    - polars >=0.20.7
+    # To avoid "ModuleNotFoundError: No module named 'polars.utils'" error, need to cap at <1.0
+    - polars >=0.20.7,<1.0
     - scikit-learn <2,>=1.2.2
     - scipy
     - tqdm
-    - typing-extensions  # [py<310]
+    - typing-extensions
 
 
 test:
