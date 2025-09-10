@@ -11,7 +11,10 @@ source:
 
 build:
   skip: True  # [py<38]
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script:
+    - export PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1  # [unix]
+    - set PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1  # [win]
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 2
 
 requirements:
